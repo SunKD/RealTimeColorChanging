@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>Sockets</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <style>
+        .box {
+            margin-top: 250px;
+            height: 150px;
+            border: 1px solid black;
+            margin-left: 5px;
+            border-radius: 10px;
+            background-color: white;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var socket = io(); //1
+            $('#green').click(function (e) {
+                socket.emit('color', "green");
+            });
+
+            $('#blue').click(function (e) {
+                socket.emit('color', "blue");
+            });
+
+            $('#pink').click(function (e) {
+                socket.emit('color', "pink");
+            });
+
+            socket.on('broad', function (data) {
+                $("body").css("background-color",data);
+                // $('body').css("background-color", '"' + data +'"');
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-3 box btn btn-default" id="green">Green</div>
+            <div class="col-md-3 box btn btn-default" id="blue">Blue</div>
+            <div class="col-md-3 box btn btn-default" id="pink">Pink</div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</body>
+
+</html>
